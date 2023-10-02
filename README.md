@@ -26,7 +26,7 @@ This module require configuration([config](https://www.npmjs.com/package/config)
     "MYSQL2" : { "alias": "mysql2", "dialect": "mysql", "url": "", "user": "user", "password": "password", "host": "localhost", "port": 3306, "database": "testdb", "options": { "charset": "utf8", "connectionLimit": 10 } },
 }
 ```
-    npm install will-util
+    npm install @willsofts/will-util
 
 ### Queries
 Since [mysql](https://www.npmjs.com/package/mysql), [mssql](https://www.npmjs.com/package/mssql), [odbc](https://www.npmjs.com/package/odbc), [oracle](https://www.npmjs.com/package/oracledb), [postgres](https://www.npmjs.com/package/pg) node module using difference place holder for parameter
