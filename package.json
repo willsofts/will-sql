@@ -33,15 +33,15 @@
     "DBConfig",
     "KnSQL"
   ],
-  "author": "tassun_oro@hotmail.com",
+  "author": "tassan_oro@freewillsolutions.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tassun/will-sql/issues"
+    "url": "https://github.com/willsofts/will-sql/issues"
   },
-  "homepage": "https://github.com/tassun/will-sql#readme",
+  "homepage": "https://github.com/willsofts/will-sql#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tassun/will-sql.git"
+    "url": "https://github.com/willsofts/will-sql.git"
   },
   "dependencies": {
     "@willsofts/will-util": "^1.0.10",
