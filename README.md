@@ -10,7 +10,7 @@ SQL by place holder parameter naming and value setting for execute statement on 
 
 ### Configuration
 
-This module require configuration([config](https://www.npmjs.com/package/config)) setting by config/default.json under project and [will-util](https://www.npmjs.com/package/will-util)
+This module require configuration([config](https://www.npmjs.com/package/config)) setting by config/default.json under project and [will-util](https://github.com/willsofts/will-util)
 
     npm install config
 
