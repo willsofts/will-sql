@@ -37,6 +37,9 @@ class KnDBConnections {
             KnDBConfig_1.dbconfig.url = configure.url;
             KnDBConfig_1.dbconfig.user = configure.user;
             KnDBConfig_1.dbconfig.password = configure.password;
+            KnDBConfig_1.dbconfig.host = configure.host;
+            KnDBConfig_1.dbconfig.port = configure.port;
+            KnDBConfig_1.dbconfig.database = configure.database;
             KnDBConfig_1.dbconfig.options = configure.options;
         }
         //console.log("dbconfig",dbconfig);

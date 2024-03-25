@@ -15,6 +15,13 @@ class MySQLPoolManager {
                 host: dbcfg.host,
                 port: dbcfg.port,
                 database: dbcfg.database,
+                /*typeCast: function (field, next) {
+                    if (field.type == "DECIMAL" || field.type == "NEWDECIMAL") {
+                        let value = field.string();
+                        return (value === null) ? null : Number(value);
+                    }
+                    return next();
+                },*/
                 ...dbcfg.options
             });
             this.pools.set(dbcfg.schema, pool);
