@@ -161,6 +161,11 @@ export declare class KnDBError extends Error {
     constructor(message: string, code: number, state?: string);
 }
 
+export declare class KnDBLibrary {
+    static getDBVersionQuery(config: KnDBConfig): string;
+    static getDBVersion(db: KnDBConnector, config: KnDBConfig): Promise<string>;
+}
+
 export declare class KnDBUtils {
     static parseDBTypes(type: string | KnDBTypes): KnDBTypes;
     static parseDBAlias(alias: (string | KnDBAlias)): KnDBAlias;

@@ -1,6 +1,6 @@
 {
   "name": "@willsofts/will-sql",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "description": "SQL by place holder parameter naming and value setting for execute statement on databases",
   "main": "index.js",
   "scripts": {
