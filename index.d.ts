@@ -153,6 +153,18 @@ export declare class KnDBError extends Error {
     /**
      * this is error code
      */
+    readonly code?: number;
+    /**
+     * this is error state
+     */
+    readonly state?: string;
+    constructor(message: string, code?: number, state?: string);
+}
+
+export declare class KnDBFault extends Error {
+    /**
+     * this is error code
+     */
     readonly code: number;
     /**
      * this is error state
