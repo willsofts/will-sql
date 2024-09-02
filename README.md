@@ -6,11 +6,22 @@ SQL by place holder parameter naming and value setting for execute statement on 
 
     npm install @willsofts/will-sql
 
+## How To Install
+This package is under [@willsofts](https://github.com/willsofts) libraries protection as private access, then you have to gain access key and setting in your own environment before start installation from administrator. \
+ex. \
+Window
+
+    set NPM_TOKEN=your access token key here
+
+Linux
+
+    export NPM_TOKEN=your access token key here
+
 ## Examples
 
 ### Configuration
 
-This module require configuration([config](https://www.npmjs.com/package/config)) setting by config/default.json under project and [will-util](https://github.com/willsofts/will-util)
+This module require configuration([config](https://www.npmjs.com/package/config)) setting by config/default.json under project and [will-util](https://www.npmjs.com/package/will-util)
 
     npm install config
 
