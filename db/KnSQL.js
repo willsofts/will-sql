@@ -144,7 +144,12 @@ class KnSQL {
     createSpan(db, ctx) {
         try {
             if (ctx) {
-                return ctx.startSpan(db.constructor.name, { tags: { sql: this.sql, config: db.config } });
+                let config = { ...db.config };
+                if (config.password)
+                    config.password = "unprint";
+                if (config.url)
+                    config.url = "unprint";
+                return ctx.startSpan(db.constructor.name, { tags: { sql: this.sql, config: config } });
             }
         }
         catch (ex) { }
