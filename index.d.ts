@@ -194,6 +194,7 @@ export declare class KnDBUtils {
     static isORACLE(config: KnDBConfig): boolean;
     static isPOSTGRES(config: KnDBConfig): boolean;
     static isSQLITE(config: KnDBConfig): boolean;
+    static hasIntensiveQuery(query: string | undefined | null): boolean;
 }
 
 export declare class KnSQL implements KnSQLInterface {
