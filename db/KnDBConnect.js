@@ -11,6 +11,9 @@ class KnDBConnect {
     async init() {
         //do nothing
     }
+    async getConnection() {
+        return Promise.reject(null);
+    }
     async doExecuteQuery(sql, params) {
         return Promise.reject(null);
     }

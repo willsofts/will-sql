@@ -47,8 +47,9 @@ interface KnDBConnector {
     readonly dialect: string;
     readonly config: KnDBConfig;
     init(): void;
+    getConnection(): Promise<any>;
     executeQuery(sql: string | KnSQLOptions, params?: KnDBParam): Promise<KnResultSet>;
-    executeUpdate(sql: string | KnSQLOptions, params?: KnDBParam): Promise<KnResultSet>;
+    executeUpdate(sql: string | KnSQLOptions, params?: KnDBParam | Array<any>): Promise<KnResultSet>;
     execQuery(sql: KnSQLInterface): Promise<KnResultSet>;
     execUpdate(sql: KnSQLInterface): Promise<KnResultSet>;
     beginWork(): Promise<void>;
@@ -104,7 +105,7 @@ interface KnSQLInterface {
     set(paramname: string, paramvalue: (string | number | boolean | bigint | null | undefined | Date | Buffer | KnDBParamValue), paramtype?: (KnDBTypes | KnEnumDBTypes)): KnSQLInterface;
     param(name: string): KnDBValue;
     executeQuery(db: KnDBConnector, ctx?: any): Promise<KnResultSet>;
-    executeUpdate(db: KnDBConnector, ctx?: any): Promise<KnResultSet>;
+    executeUpdate(db: KnDBConnector, ctx?: any, params?: Array<any>): Promise<KnResultSet>;
     getSQLOptions(db: KnDBConnector): [KnSQLOptions, KnDBParam];
 }
 export { KnDBAlias, KnDBDialect, KnDBTypes, KnEnumDBTypes, KnDBValue, KnDBParam, KnDBParamValue, KnDBConnector, KnPageOffset, KnResultSet, KnRecordSet, KnSQLOptions, KnSQLInterface };
@@ -130,10 +131,11 @@ export declare abstract class KnDBConnect implements KnDBConnector {
     readonly config: KnDBConfig;
     constructor(alias: (KnDBAlias | KnEnumDBAlias), dialect: string, config: KnDBConfig);
     init(): Promise<void>;
+    getConnection(): Promise<any>;
     protected doExecuteQuery(sql: string | KnSQLOptions, params?: KnDBParam): Promise<KnResultSet>;
-    protected doExecuteUpdate(sql: string | KnSQLOptions, params?: KnDBParam): Promise<KnResultSet>;
+    protected doExecuteUpdate(sql: string | KnSQLOptions, params?: KnDBParam | Array<any>): Promise<KnResultSet>;
     executeQuery(sql: string | KnSQLOptions, params?: KnDBParam): Promise<KnResultSet>;
-    executeUpdate(sql: string | KnSQLOptions, params?: KnDBParam): Promise<KnResultSet>;
+    executeUpdate(sql: string | KnSQLOptions, params?: KnDBParam | Array<any>): Promise<KnResultSet>;
     execQuery(sql: KnSQLInterface): Promise<KnResultSet>;
     execUpdate(sql: KnSQLInterface): Promise<KnResultSet>;
     beginWork(): Promise<void>;
@@ -212,6 +214,6 @@ export declare class KnSQL implements KnSQLInterface {
     getDBParam(names: string[]): KnDBParam;
     getSQLOptions(db: KnDBConnector): [KnSQLOptions, KnDBParam];
     executeQuery(db: KnDBConnector, ctx?: any): Promise<KnResultSet>;
-    executeUpdate(db: KnDBConnector, ctx?: any): Promise<KnResultSet>;
+    executeUpdate(db: KnDBConnector, ctx?: any, params?: Array<any>): Promise<KnResultSet>;
     createSpan(db: KnDBConnector, ctx?: any): any;
 }

@@ -16,6 +16,10 @@ class OracleDB extends KnDBConnect_1.KnDBConnect {
     async init() {
         await this.initConnection();
     }
+    async getConnection() {
+        await this.initConnection();
+        return this.connection;
+    }
     reset() {
         this.connection = undefined;
     }

@@ -4,15 +4,19 @@ exports.MsSQLDBQuery = void 0;
 const KnDBUtils_1 = require("../KnDBUtils");
 class MsSQLDBQuery {
     static assignParameters(conn, params) {
-        if (params) {
-            for (let p in params) {
-                let pv = params[p];
-                let paraValue = KnDBUtils_1.KnDBUtils.parseParamValue(pv);
-                try {
-                    conn.input(p, paraValue);
-                }
-                catch (ex) {
-                    conn.parameters[p].value = paraValue;
+        if (Array.isArray(params)) {
+        }
+        else {
+            if (params) {
+                for (let p in params) {
+                    let pv = params[p];
+                    let paraValue = KnDBUtils_1.KnDBUtils.parseParamValue(pv);
+                    try {
+                        conn.input(p, paraValue);
+                    }
+                    catch (ex) {
+                        conn.parameters[p].value = paraValue;
+                    }
                 }
             }
         }
@@ -37,6 +41,8 @@ class MsSQLDBQuery {
         return Promise.resolve({ rows: rows, columns: cols });
     }
     static async executeUpdate(conn, query, params) {
+        if (Array.isArray(params))
+            return Promise.reject(new Error("Parameter array not supported"));
         let sql = KnDBUtils_1.KnDBUtils.getQuery(query);
         this.assignParameters(conn, params);
         let result = await conn.query(sql);

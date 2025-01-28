@@ -110,7 +110,9 @@ class KnSQL {
     getDBParam(names) {
         let results = {};
         for (let name of names) {
-            results[name] = this.param(name);
+            if (name.trim().length > 0) {
+                results[name] = this.param(name);
+            }
         }
         return results;
     }
@@ -130,11 +132,12 @@ class KnSQL {
                 span.finish();
         }
     }
-    async executeUpdate(db, ctx) {
+    async executeUpdate(db, ctx, params) {
         let span = this.createSpan(db, ctx);
         try {
             let [sqlopts, dbparam] = this.getSQLOptions(db);
-            return db.executeUpdate(sqlopts, dbparam);
+            console.log("executeUpdate: params", params);
+            return db.executeUpdate(sqlopts, params || dbparam);
         }
         finally {
             if (span)

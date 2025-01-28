@@ -16,6 +16,10 @@ class SQLiteDB extends KnDBConnect_1.KnDBConnect {
     async init() {
         this.initConnection();
     }
+    async getConnection() {
+        await this.initConnection();
+        return this.connection;
+    }
     reset() {
         this.connection = undefined;
     }
