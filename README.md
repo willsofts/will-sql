@@ -265,3 +265,29 @@ async function testQuery() {
     db.end(); //close connection pool
 }
 ```
+
+### Bulk Insert
+This can be made of parameter array when `executeUpdate`.
+
+```typescript
+import { KnSQL, KnDBConnections } from "@willsofts/will-sql";
+
+async function testBulk() {
+    let params : any = [ [
+        ["BULK-1","Testing",new Date(),new Date(),1000],
+        ["BULK-2","Testing",new Date(),new Date(),2000],
+        ["BULK-3","Testing",new Date(),new Date(),3000],
+    ] ];
+    let knsql = new KnSQL();
+    knsql.append("insert into test1(field1,field2,field3,field4,field5) values ?");
+    const db = KnDBConnections.getDBConnector("MYSQL");
+    let rs = await knsql.executeUpdate(db,undefined,params);
+    console.log("update",rs);
+    db.close();
+    db.end();
+}
+```
+CAUTION: This is not support in mssql, since it use table object implement directly so try to `getConnection` from the connector and try cast with Request instance of mssql driver.
+
+    const con = await db.getConnection();
+    const request = con as Request;
