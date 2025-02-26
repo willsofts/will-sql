@@ -136,7 +136,6 @@ class KnSQL {
         let span = this.createSpan(db, ctx);
         try {
             let [sqlopts, dbparam] = this.getSQLOptions(db);
-            console.log("executeUpdate: params", params);
             return db.executeUpdate(sqlopts, params || dbparam);
         }
         finally {
