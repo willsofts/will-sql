@@ -185,9 +185,9 @@ export declare class KnDBUtils {
     static parseDBAlias(alias: (string | KnDBAlias)): KnDBAlias;
     static parseDBDialect(dialect: (string | KnDBDialect)): KnDBDialect;
     static parseSQLOptions(query: string | KnSQLOptions): KnSQLOptions | undefined;
-    static parseParamValue(param: KnDBValue): any;
+    static parseParamValue(param: KnDBValue, dialect?: string): any;
     static getQuery(query: string | KnSQLOptions): string;
-    static extractDBParam(params?: KnDBParam): [any, string[], string[]];
+    static extractDBParam(params?: KnDBParam, dialect?: string): [any, string[], string[]];
     static isSQLInterface(element: unknown): element is KnSQLInterface;
     static isMYSQL(config: KnDBConfig): boolean;
     static isDB2(config: KnDBConfig): boolean;

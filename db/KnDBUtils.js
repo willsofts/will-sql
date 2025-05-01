@@ -85,13 +85,18 @@ class KnDBUtils {
             return query;
         }
     }
-    static parseParamValue(param) {
+    static parseParamValue(param, dialect) {
         let paramType = this.parseDBTypes(param.type);
         if (paramType == KnDBAlias_1.KnDBTypes.DECIMAL || paramType == KnDBAlias_1.KnDBTypes.BIGINT || paramType == KnDBAlias_1.KnDBTypes.INTEGER) {
             return will_util_1.Utilities.parseFloat(param.value);
         }
         else if (paramType == KnDBAlias_1.KnDBTypes.DATE || paramType == KnDBAlias_1.KnDBTypes.DATETIME) {
             return will_util_1.Utilities.parseDate(param.value);
+        }
+        else if (paramType == KnDBAlias_1.KnDBTypes.TIME) {
+            if (param.value instanceof Date && "pg" == dialect) {
+                return will_util_1.Utilities.getHMS(param.value);
+            }
         }
         return param.value;
     }
@@ -103,7 +108,7 @@ class KnDBUtils {
             return query.sql;
         }
     }
-    static extractDBParam(params) {
+    static extractDBParam(params, dialect) {
         let paravalues = [];
         let paranames = [];
         let paratypes = [];
@@ -111,7 +116,7 @@ class KnDBUtils {
             for (let p in params) {
                 let pv = params[p];
                 paranames.push(p);
-                paravalues.push(this.parseParamValue(pv));
+                paravalues.push(this.parseParamValue(pv, dialect));
                 paratypes.push(pv.type);
             }
         }

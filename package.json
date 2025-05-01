@@ -1,6 +1,6 @@
 {
   "name": "@willsofts/will-sql",
-  "version": "1.0.35",
+  "version": "1.0.36",
   "description": "SQL by place holder parameter naming and value setting for execute statement on databases",
   "main": "index.js",
   "scripts": {
@@ -44,7 +44,7 @@
     "url": "https://github.com/willsofts/will-sql.git"
   },
   "dependencies": {
-    "@willsofts/will-util": "^1.0.23",
+    "@willsofts/will-util": "^1.0.26",
     "config": "^3.3.8"
   },
   "devDependencies": {
