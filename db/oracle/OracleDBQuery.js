@@ -9,7 +9,7 @@ const KnDBUtils_1 = require("../KnDBUtils");
 class OracleDBQuery {
     static async executeQuery(conn, query, params) {
         let sql = KnDBUtils_1.KnDBUtils.getQuery(query);
-        let [parameters] = KnDBUtils_1.KnDBUtils.extractDBParam(params);
+        let [parameters] = Array.isArray(params) ? [params] : KnDBUtils_1.KnDBUtils.extractDBParam(params);
         let result = await conn.execute(sql, parameters, {
             outFormat: oracledb_1.default.OUT_FORMAT_OBJECT,
             extendedMetaData: true

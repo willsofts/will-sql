@@ -20,23 +20,23 @@ class KnDBConnect {
     async doExecuteUpdate(sql, params) {
         return Promise.reject(null);
     }
-    async executeQuery(sql, params) {
+    async executeQuery(sql, params, ctx) {
         if (KnDBUtils_1.KnDBUtils.isSQLInterface(sql)) {
-            return this.execQuery(sql);
+            return this.execQuery(sql, ctx);
         }
         return this.doExecuteQuery(sql, params);
     }
-    async executeUpdate(sql, params) {
+    async executeUpdate(sql, params, ctx) {
         if (KnDBUtils_1.KnDBUtils.isSQLInterface(sql)) {
             return this.execUpdate(sql);
         }
         return this.doExecuteUpdate(sql, params);
     }
-    async execQuery(sql) {
-        return sql.executeQuery(this);
+    async execQuery(sql, ctx) {
+        return sql.executeQuery(this, ctx);
     }
-    async execUpdate(sql) {
-        return sql.executeUpdate(this);
+    async execUpdate(sql, ctx) {
+        return sql.executeUpdate(this, ctx);
     }
     async beginWork() {
         return Promise.reject();

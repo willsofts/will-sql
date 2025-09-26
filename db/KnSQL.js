@@ -14,9 +14,11 @@ class KnSQL {
     clear() {
         this.sql = "";
         this.params.clear();
+        return this;
     }
     clearParameter() {
         this.params.clear();
+        return this;
     }
     append(sql) {
         this.sql += sql;
@@ -121,9 +123,13 @@ class KnSQL {
         let dbparam = this.getDBParam(paramnames);
         return [{ sql: sql, options: this.options }, dbparam];
     }
-    async executeQuery(db, ctx) {
+    async executeQuery(db, ctx, params) {
         let span = this.createSpan(db, ctx);
         try {
+            if (params) {
+                let [sql] = this.getExactlySql(db.alias);
+                return db.executeQuery({ sql: sql, options: this.options }, params);
+            }
             let [sqlopts, dbparam] = this.getSQLOptions(db);
             return db.executeQuery(sqlopts, dbparam);
         }
@@ -135,8 +141,12 @@ class KnSQL {
     async executeUpdate(db, ctx, params) {
         let span = this.createSpan(db, ctx);
         try {
+            if (params) {
+                let [sql] = this.getExactlySql(db.alias);
+                return db.executeUpdate({ sql: sql, options: this.options }, params);
+            }
             let [sqlopts, dbparam] = this.getSQLOptions(db);
-            return db.executeUpdate(sqlopts, params || dbparam);
+            return db.executeUpdate(sqlopts, dbparam);
         }
         finally {
             if (span)

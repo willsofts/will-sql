@@ -5,7 +5,7 @@ const KnDBUtils_1 = require("../KnDBUtils");
 class MySQLDBQuery {
     static executeQuery(conn, query, params) {
         let sql = KnDBUtils_1.KnDBUtils.getQuery(query);
-        let [parameters] = KnDBUtils_1.KnDBUtils.extractDBParam(params);
+        let [parameters] = Array.isArray(params) ? [params] : KnDBUtils_1.KnDBUtils.extractDBParam(params);
         return new Promise((resolve, reject) => {
             conn.query(sql, parameters, (qerr, rows, fields) => {
                 if (qerr) {
