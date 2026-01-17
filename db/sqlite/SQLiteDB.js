@@ -9,7 +9,7 @@ class SQLiteDB extends KnDBConnect_1.KnDBConnect {
         this.connection = connection;
     }
     async initConnection() {
-        if (this.connection == undefined || this.connection == null) {
+        if (!this.connection) {
             this.connection = this.connector.getConnection();
         }
     }

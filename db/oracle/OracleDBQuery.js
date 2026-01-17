@@ -14,7 +14,7 @@ class OracleDBQuery {
             outFormat: oracledb_1.default.OUT_FORMAT_OBJECT,
             extendedMetaData: true
         });
-        return Promise.resolve({ rows: result.rows, columns: result.metaData });
+        return { rows: result.rows, columns: result.metaData };
     }
     static async executeUpdate(conn, query, params) {
         let sql = KnDBUtils_1.KnDBUtils.getQuery(query);
@@ -23,7 +23,7 @@ class OracleDBQuery {
             outFormat: oracledb_1.default.OUT_FORMAT_OBJECT,
             extendedMetaData: true
         });
-        return Promise.resolve({ rows: { affectedRows: result.rowsAffected }, columns: null });
+        return { rows: { affectedRows: result.rowsAffected }, columns: null };
     }
     static beginWork(conn) {
         oracledb_1.default.autoCommit = false;

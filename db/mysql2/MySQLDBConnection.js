@@ -40,7 +40,6 @@ class MySQLDBConnection {
     static releaseConnection(conn) {
         try {
             let pconn = conn;
-            //pconn.release(); 
             pconn.destroy();
         }
         catch (ex) {

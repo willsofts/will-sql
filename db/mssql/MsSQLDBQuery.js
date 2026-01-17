@@ -12,27 +12,26 @@ class MsSQLDBQuery {
                     conn.input(p, paraValue);
                 }
                 catch (ex) {
+                    console.debug("fallback parameter assignment", ex);
                     conn.parameters[p].value = paraValue;
                 }
             }
         }
-        else {
-            if (params) {
-                for (let p in params) {
-                    let pv = params[p];
-                    let paraValue = KnDBUtils_1.KnDBUtils.parseParamValue(pv);
-                    try {
-                        conn.input(p, paraValue);
-                    }
-                    catch (ex) {
-                        conn.parameters[p].value = paraValue;
-                    }
+        else if (params) {
+            for (let p in params) {
+                let pv = params[p];
+                let paraValue = KnDBUtils_1.KnDBUtils.parseParamValue(pv);
+                try {
+                    conn.input(p, paraValue);
+                }
+                catch (ex) {
+                    console.debug("fallback parameter assignment", ex);
+                    conn.parameters[p].value = paraValue;
                 }
             }
         }
     }
     static async executeQuery(conn, query, params) {
-        //if(Array.isArray(params)) return Promise.reject(new Error("Parameter array not supported"));
         let sql = KnDBUtils_1.KnDBUtils.getQuery(query);
         this.assignParameters(conn, params);
         let req = conn;
@@ -49,14 +48,13 @@ class MsSQLDBQuery {
             rows[idx] = json;
         }
         ;
-        return Promise.resolve({ rows: rows, columns: cols });
+        return { rows: rows, columns: cols };
     }
     static async executeUpdate(conn, query, params) {
-        //if(Array.isArray(params)) return Promise.reject(new Error("Parameter array not supported"));
         let sql = KnDBUtils_1.KnDBUtils.getQuery(query);
         this.assignParameters(conn, params);
         let result = await conn.query(sql);
-        return Promise.resolve({ rows: { affectedRows: result.rowsAffected[0] }, columns: null });
+        return { rows: { affectedRows: result.rowsAffected[0] }, columns: null };
     }
     static beginWork(conn) {
         return new Promise((resolve, reject) => {

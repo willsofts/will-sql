@@ -35,7 +35,7 @@ class KnDBLibrary {
                     let row = rs.rows[0];
                     let keys = Object.keys(row);
                     if (keys.length > 0) {
-                        return Promise.resolve(row[keys[0]]);
+                        return row[keys[0]];
                     }
                 }
             }
@@ -43,7 +43,7 @@ class KnDBLibrary {
         catch (ex) {
             console.error(ex);
         }
-        return Promise.resolve("");
+        return "";
     }
 }
 exports.KnDBLibrary = KnDBLibrary;

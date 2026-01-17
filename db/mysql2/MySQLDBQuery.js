@@ -3,6 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MySQLDBQuery = void 0;
 const KnDBUtils_1 = require("../KnDBUtils");
 class MySQLDBQuery {
+    static isResultSet(result) {
+        return (typeof result === "object" &&
+            result !== null &&
+            "affectedRows" in result);
+    }
     static executeQuery(conn, query, params) {
         let sql = KnDBUtils_1.KnDBUtils.getQuery(query);
         let [parameters] = Array.isArray(params) ? [params] : KnDBUtils_1.KnDBUtils.extractDBParam(params);
@@ -26,8 +31,8 @@ class MySQLDBQuery {
                     reject(qerr);
                 }
                 else {
-                    let r = rows;
-                    resolve({ rows: { affectedRows: r.affectedRows }, columns: fields });
+                    let affectedRows = this.isResultSet(rows) ? rows.affectedRows : 0;
+                    resolve({ rows: { affectedRows: affectedRows }, columns: fields });
                 }
             });
         });

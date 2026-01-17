@@ -52,7 +52,7 @@ class OdbcDBQuery {
         const rows = await stm.execute();
         let columns = rows.columns;
         this.removeAttributes(rows);
-        return Promise.resolve({ rows: rows, columns: columns });
+        return { rows: rows, columns: columns };
     }
     static async statementUpdate(conn, query, params) {
         let sql = KnDBUtils_1.KnDBUtils.getQuery(query);
@@ -63,7 +63,7 @@ class OdbcDBQuery {
         const rows = await stm.execute();
         let count = rows.count;
         let columns = rows.columns;
-        return Promise.resolve({ rows: { affectedRows: count }, columns: columns });
+        return { rows: { affectedRows: count }, columns: columns };
     }
     static beginWork(conn) {
         return new Promise((resolve, reject) => {

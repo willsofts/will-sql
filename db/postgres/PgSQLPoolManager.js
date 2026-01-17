@@ -24,10 +24,9 @@ class PgSQLPoolManager {
     }
     static destroy() {
         let poolary = Array.from(this.pools.values());
-        Promise.all(poolary.map((pool) => {
-            pool.end(() => {
-            });
-        }));
+        poolary.forEach(pool => {
+            pool.end(() => { });
+        });
         this.pools.clear();
     }
 }

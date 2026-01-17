@@ -6,76 +6,64 @@ const KnDBAlias_1 = require("./KnDBAlias");
 const KnDBError_1 = require("./KnDBError");
 class KnDBUtils {
     static parseDBTypes(type) {
-        if (typeof type === "string") {
-            if (will_util_1.Utilities.equalsIgnoreCase(type, "INTEGER") || will_util_1.Utilities.equalsIgnoreCase(type, "NUMBER"))
-                return KnDBAlias_1.KnDBTypes.INTEGER;
-            if (will_util_1.Utilities.equalsIgnoreCase(type, "DECIMAL"))
-                return KnDBAlias_1.KnDBTypes.DECIMAL;
-            if (will_util_1.Utilities.equalsIgnoreCase(type, "BOOLEAN"))
-                return KnDBAlias_1.KnDBTypes.BOOLEAN;
-            if (will_util_1.Utilities.equalsIgnoreCase(type, "BIGINT"))
-                return KnDBAlias_1.KnDBTypes.BIGINT;
-            if (will_util_1.Utilities.equalsIgnoreCase(type, "TEXT"))
-                return KnDBAlias_1.KnDBTypes.TEXT;
-            if (will_util_1.Utilities.equalsIgnoreCase(type, "DATE"))
-                return KnDBAlias_1.KnDBTypes.DATE;
-            if (will_util_1.Utilities.equalsIgnoreCase(type, "TIME"))
-                return KnDBAlias_1.KnDBTypes.TIME;
-            if (will_util_1.Utilities.equalsIgnoreCase(type, "DATETIME"))
-                return KnDBAlias_1.KnDBTypes.DATETIME;
-            if (will_util_1.Utilities.equalsIgnoreCase(type, "BLOB"))
-                return KnDBAlias_1.KnDBTypes.BLOB;
-            if (will_util_1.Utilities.equalsIgnoreCase(type, "CLOB"))
-                return KnDBAlias_1.KnDBTypes.CLOB;
-            return KnDBAlias_1.KnDBTypes.STRING;
-        }
-        else {
+        if (typeof type !== "string") {
             return type;
         }
+        const t = type.toUpperCase();
+        const typeMap = {
+            INTEGER: KnDBAlias_1.KnDBTypes.INTEGER,
+            NUMBER: KnDBAlias_1.KnDBTypes.INTEGER,
+            DECIMAL: KnDBAlias_1.KnDBTypes.DECIMAL,
+            BOOLEAN: KnDBAlias_1.KnDBTypes.BOOLEAN,
+            BIGINT: KnDBAlias_1.KnDBTypes.BIGINT,
+            TEXT: KnDBAlias_1.KnDBTypes.TEXT,
+            DATE: KnDBAlias_1.KnDBTypes.DATE,
+            TIME: KnDBAlias_1.KnDBTypes.TIME,
+            DATETIME: KnDBAlias_1.KnDBTypes.DATETIME,
+            BLOB: KnDBAlias_1.KnDBTypes.BLOB,
+            CLOB: KnDBAlias_1.KnDBTypes.CLOB
+        };
+        return typeMap[t] ?? KnDBAlias_1.KnDBTypes.STRING;
     }
     static parseDBAlias(alias) {
-        if (typeof alias === "string") {
-            if (will_util_1.Utilities.equalsIgnoreCase("MYSQL", alias))
-                return KnDBAlias_1.KnDBAlias.MYSQL;
-            if (will_util_1.Utilities.equalsIgnoreCase("MYSQL2", alias))
-                return KnDBAlias_1.KnDBAlias.MYSQL2;
-            if (will_util_1.Utilities.equalsIgnoreCase("MSSQL", alias))
-                return KnDBAlias_1.KnDBAlias.MSSQL;
-            if (will_util_1.Utilities.equalsIgnoreCase("ODBC", alias))
-                return KnDBAlias_1.KnDBAlias.ODBC;
-            if (will_util_1.Utilities.equalsIgnoreCase("ORACLE", alias))
-                return KnDBAlias_1.KnDBAlias.ORACLE;
-            if (will_util_1.Utilities.equalsIgnoreCase("POSTGRES", alias))
-                return KnDBAlias_1.KnDBAlias.POSTGRES;
-            if (will_util_1.Utilities.equalsIgnoreCase("SQLITE", alias))
-                return KnDBAlias_1.KnDBAlias.SQLITE;
-            throw new KnDBError_1.KnDBError("Unknown alias '" + alias + "'", -10201);
-        }
-        else {
+        if (typeof alias !== "string") {
             return alias;
         }
+        const key = alias.toUpperCase();
+        const aliasMap = {
+            MYSQL: KnDBAlias_1.KnDBAlias.MYSQL,
+            MYSQL2: KnDBAlias_1.KnDBAlias.MYSQL2,
+            MSSQL: KnDBAlias_1.KnDBAlias.MSSQL,
+            ODBC: KnDBAlias_1.KnDBAlias.ODBC,
+            ORACLE: KnDBAlias_1.KnDBAlias.ORACLE,
+            POSTGRES: KnDBAlias_1.KnDBAlias.POSTGRES,
+            SQLITE: KnDBAlias_1.KnDBAlias.SQLITE
+        };
+        const result = aliasMap[key];
+        if (result === undefined) {
+            throw new KnDBError_1.KnDBError(`Unknown alias '${alias}'`, -10201);
+        }
+        return result;
     }
     static parseDBDialect(dialect) {
-        if (typeof dialect === "string") {
-            if (will_util_1.Utilities.equalsIgnoreCase("mysql", dialect))
-                return KnDBAlias_1.KnDBDialect.MYSQL;
-            if (will_util_1.Utilities.equalsIgnoreCase("mssql", dialect))
-                return KnDBAlias_1.KnDBDialect.MSSQL;
-            if (will_util_1.Utilities.equalsIgnoreCase("oracle", dialect))
-                return KnDBAlias_1.KnDBDialect.ORACLE;
-            if (will_util_1.Utilities.equalsIgnoreCase("postgres", dialect))
-                return KnDBAlias_1.KnDBDialect.POSTGRES;
-            if (will_util_1.Utilities.equalsIgnoreCase("informix", dialect))
-                return KnDBAlias_1.KnDBDialect.INFORMIX;
-            if (will_util_1.Utilities.equalsIgnoreCase("db2", dialect))
-                return KnDBAlias_1.KnDBDialect.DB2;
-            if (will_util_1.Utilities.equalsIgnoreCase("sqlite", dialect))
-                return KnDBAlias_1.KnDBDialect.SQLITE;
-            throw new KnDBError_1.KnDBError("Unknown dialect '" + dialect + "'", -10202);
-        }
-        else {
+        if (typeof dialect !== "string") {
             return dialect;
         }
+        const key = dialect.toUpperCase();
+        const dialectMap = {
+            MYSQL: KnDBAlias_1.KnDBDialect.MYSQL,
+            MSSQL: KnDBAlias_1.KnDBDialect.MSSQL,
+            ORACLE: KnDBAlias_1.KnDBDialect.ORACLE,
+            POSTGRES: KnDBAlias_1.KnDBDialect.POSTGRES,
+            INFORMIX: KnDBAlias_1.KnDBDialect.INFORMIX,
+            DB2: KnDBAlias_1.KnDBDialect.DB2,
+            SQLITE: KnDBAlias_1.KnDBDialect.SQLITE
+        };
+        const result = dialectMap[key];
+        if (result === undefined) {
+            throw new KnDBError_1.KnDBError(`Unknown dialect '${dialect}'`, -10202);
+        }
+        return result;
     }
     static parseSQLOptions(query) {
         if (typeof query === "string") {
@@ -152,7 +140,7 @@ class KnDBUtils {
         if (!query || query.trim().length == 0)
             return false;
         let q = query.toLowerCase();
-        return q.indexOf("insert") >= 0 || q.indexOf("update") >= 0 || q.indexOf("delete") >= 0 || q.indexOf("drop") >= 0 || q.indexOf("alter") >= 0 || q.indexOf("execute") >= 0 || q.indexOf("exec") >= 0 || q.indexOf("truncate") >= 0;
+        return q.includes("insert") || q.includes("update") || q.includes("delete") || q.includes("drop") || q.includes("alter") || q.includes("execute") || q.includes("exec") || q.includes("truncate");
     }
 }
 exports.KnDBUtils = KnDBUtils;

@@ -7,8 +7,8 @@ exports.MySQLPoolManager = void 0;
 const mysql2_1 = __importDefault(require("mysql2"));
 const will_util_1 = __importDefault(require("@willsofts/will-util"));
 const CAST_DB_TYPES = will_util_1.default.env("CAST_DB_TYPES", "DECIMAL,JSON");
-const CAST_DB_TYPES_DECIMAL = CAST_DB_TYPES.indexOf("DECIMAL") >= 0;
-const CAST_DB_TYPES_JSON = CAST_DB_TYPES.indexOf("JSON") >= 0;
+const CAST_DB_TYPES_DECIMAL = CAST_DB_TYPES.includes("DECIMAL");
+const CAST_DB_TYPES_JSON = CAST_DB_TYPES.includes("JSON");
 class MySQLPoolManager {
     static getPool(dbcfg) {
         let pool = this.pools.get(dbcfg.schema);

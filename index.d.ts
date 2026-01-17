@@ -46,7 +46,7 @@ interface KnDBConnector {
     readonly alias: KnDBAlias;
     readonly dialect: string;
     readonly config: KnDBConfig;
-    init(): void;
+    init(): Promise<void>;
     getConnection(): Promise<any>;
     executeQuery(sql: string | KnSQLOptions, params?: KnDBParam | Array<any>): Promise<KnResultSet>;
     executeUpdate(sql: string | KnSQLOptions, params?: KnDBParam | Array<any>): Promise<KnResultSet>;
@@ -209,6 +209,9 @@ export declare class KnSQL implements KnSQLInterface {
     append(sql: string): KnSQLInterface;
     set(paramname: string, paramvalue: (string | number | boolean | bigint | null | undefined | Date | Buffer | KnDBParamValue), paramtype?: (KnDBTypes | KnEnumDBTypes)): KnSQLInterface;
     param(name: string): KnDBValue;
+    protected getPlaceHolder(dba: any, element: string): string;
+    protected isParamToken(item: string): boolean;
+    protected getSqlItem(dba: any, item: string, index: number, paramnames: string[]): [string, number];
     getExactlySql(alias?: (string | KnDBAlias)): [string, string[]];
     parameters(names: string[]): any;
     getDBParam(names: string[]): KnDBParam;

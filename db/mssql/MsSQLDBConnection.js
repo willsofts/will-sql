@@ -14,13 +14,13 @@ class MsSQLDBConnection {
         if (transaction) {
             let request = transaction.request();
             request.transaction = transaction;
-            return Promise.resolve(request);
+            return request;
         }
-        return Promise.resolve(pool.request());
+        return pool.request();
     }
     async getTransaction() {
         let pool = await this.getPool();
-        return Promise.resolve(pool.transaction());
+        return pool.transaction();
     }
     static releaseConnection(conn) {
         try {

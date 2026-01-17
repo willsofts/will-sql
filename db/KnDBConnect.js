@@ -12,13 +12,13 @@ class KnDBConnect {
         //do nothing
     }
     async getConnection() {
-        return Promise.reject(null);
+        throw new Error("Not implementation");
     }
     async doExecuteQuery(sql, params) {
-        return Promise.reject(null);
+        throw new Error("Not implementation");
     }
     async doExecuteUpdate(sql, params) {
-        return Promise.reject(null);
+        throw new Error("Not implementation");
     }
     async executeQuery(sql, params, ctx) {
         if (KnDBUtils_1.KnDBUtils.isSQLInterface(sql)) {
@@ -39,13 +39,13 @@ class KnDBConnect {
         return sql.executeUpdate(this, ctx);
     }
     async beginWork() {
-        return Promise.reject();
+        throw new Error("Not implementation");
     }
     async commitWork() {
-        return Promise.reject();
+        throw new Error("Not implementation");
     }
     async rollbackWork() {
-        return Promise.reject();
+        throw new Error("Not implementation");
     }
     reset() {
         //do nothing
