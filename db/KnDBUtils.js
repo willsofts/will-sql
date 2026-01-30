@@ -4,6 +4,7 @@ exports.KnDBUtils = void 0;
 const will_util_1 = require("@willsofts/will-util");
 const KnDBAlias_1 = require("./KnDBAlias");
 const KnDBError_1 = require("./KnDBError");
+const RESERVE_QUERIES = ["insert", "update", "delete", "drop", "alter", "execute", "exec", "truncate"];
 class KnDBUtils {
     static parseDBTypes(type) {
         if (typeof type !== "string") {
@@ -140,7 +141,7 @@ class KnDBUtils {
         if (!query || query.trim().length == 0)
             return false;
         let q = query.toLowerCase();
-        return q.includes("insert") || q.includes("update") || q.includes("delete") || q.includes("drop") || q.includes("alter") || q.includes("execute") || q.includes("exec") || q.includes("truncate");
+        return RESERVE_QUERIES.some(key => q.includes(key));
     }
 }
 exports.KnDBUtils = KnDBUtils;
