@@ -178,6 +178,8 @@ export declare class KnDBFault extends Error {
 export declare class KnDBLibrary {
     static getDBVersionQuery(config: KnDBConfig): string;
     static getDBVersion(db: KnDBConnector, config: KnDBConfig): Promise<string>;
+    static getQueryTimestamp(config: KnDBConfig): string;
+    static getServerTimestamp(db: KnDBConnector, config: KnDBConfig): Promise<Date | undefined>;
 }
 
 export declare class KnDBUtils {
