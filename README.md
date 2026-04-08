@@ -291,3 +291,7 @@ CAUTION: This is not support in mssql, since it use table object implement direc
 
     const con = await db.getConnection();
     const request = con as Request;
+
+---
+### Classes Usage
+See more detail [will-sql](./will-sql.md)
